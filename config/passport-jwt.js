@@ -21,6 +21,23 @@ passport.use(new jwtStrategy(opts ,async function(payload,done){
     }
 }))
 
+const facultyopts={
+    jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey:"FRNW"
+}
+
+const facultymodel=require("../model/facultymodel");
+
+passport.use('faculty', new jwtStrategy(facultyopts ,async function(payload,done){
+    let checkfacultyemail=await facultymodel.findOne({email:payload.ft.email});
+    if(checkfacultyemail){
+        return done(null,checkfacultyemail)
+    }
+    else{
+        return done(null,false)
+    }
+}))
+
 passport.serializeUser((user,done)=>{
     return done(null,user.id)
 })

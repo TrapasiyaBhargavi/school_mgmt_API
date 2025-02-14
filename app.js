@@ -4,7 +4,7 @@ const port=8001;
 
 const app=express();
 
-// const db=require("./config/db");
+// const db=require("./config/db")
 
 const mongoose=require("mongoose");
 
@@ -17,7 +17,6 @@ mongoose.connect("mongodb+srv://bhargavitrapasiya12:OTUnLTQlfQAxcUJ2@cluster0.dj
 .catch((err)=>{
     console.log("db is not connected")
 })
-
 const passport=require("passport");
 const jwtStrategy=require("./config/passport-jwt");
 const session=require("express-session")
@@ -40,6 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/api",require("./routes/api/v1/adminRoutes"));
+
+app.use("/api/faculty",require("./routes/api/v1/facultyRoutes"));
 
 app.listen(port,(err)=>{
     if(err){

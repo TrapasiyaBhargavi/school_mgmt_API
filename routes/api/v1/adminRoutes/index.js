@@ -27,4 +27,10 @@ routes.post("/changepassword",passport.authenticate('jwt',{failureRedirect:'/api
 
 routes.get("/adminlogout",passport.authenticate('jwt',{failureRedirect:'/api/adminfailtoken'}),adminctl.adminlogout);
 
+routes.post("/checkemail",adminctl.checkemail);
+
+routes.post("/updatepassword",adminctl.updatepassword);
+
+routes.post("/facultyregister",adminctl.facultyregister)
+
 module.exports=routes;
